@@ -8,6 +8,10 @@ const obs$ = new Observable<string>( subs => {
     
     subs.next('Hola');
     subs.next('Mundo');
+    
+    //Forzar un error
+    const a = undefined;
+    a.nombre = 'Fernando';
 
     subs.complete();
    
@@ -17,7 +21,11 @@ const obs$ = new Observable<string>( subs => {
 });
 
 
-obs$.subscribe( console.log )
+obs$.subscribe(
+valor => console.log('next: ', valor),
+error => console.warn('error: ', error),
+() => console.info('Completado')
+);
 
 
 
